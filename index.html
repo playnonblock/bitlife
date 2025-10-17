@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitLife Unblocked</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(15, 15, 30, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #00d4ff;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .game-section {
+            background: rgba(26, 26, 46, 0.6);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .game-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .game-description {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        #gameCanvas {
+            background: #0a0a15;
+            border-radius: 10px;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+            border: 2px solid #00d4ff;
+            max-width: 100%;
+        }
+
+        .game-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00d4ff, #7b2ff7);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .score-board {
+            display: flex;
+            gap: 2rem;
+            font-size: 1.2rem;
+            background: rgba(0, 212, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .score-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .score-label {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .score-value {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .instructions {
+            background: rgba(123, 47, 247, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(123, 47, 247, 0.3);
+            margin-top: 2rem;
+        }
+
+        .instructions h3 {
+            color: #7b2ff7;
+            margin-bottom: 1rem;
+        }
+
+        .instructions ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .instructions li {
+            padding: 0.5rem 0;
+            color: #c0c0c0;
+        }
+
+        .instructions li::before {
+            content: "▸ ";
+            color: #7b2ff7;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #707070;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                gap: 1rem;
+            }
+
+            .game-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            #gameCanvas {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(0, 212, 255, 0.6);
+            }
+        }
+
+        .game-over-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .game-over-content {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #00d4ff;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+        }
+
+        .game-over-content h2 {
+            font-size: 3rem;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+
+        .game-over-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">🎮 Unblocked Games</div>
+            <nav>
+                <a href="#">Other Unblocked Games</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="game-section">
+            <div class="game-header">
+                <h1 class="game-title">BitLife Unblocked</h1>
+            </div>
+
+            <div class="game-container">
+
+                <div width="600" height="600"><iframe src="https://html5.gamemonetize.co/sunlne8825d1006jux3b1xrl9vda49f1/" width="465" height="750" scrolling="none" frameborder="0"></iframe></div>
+
+                <article class="instructions">
+                    <p>Are you ready to play a fun game on your school Chromebook? Look no further than BitLife! This popular unblocked classroom game lets you make choices that shape your life. Do you want to be a model citizen, or will you take risks and live an exciting but unpredictable life? In BitLife, you can choose to get married, have kids, and go to school. You can even cheat on your spouse or start a life of crime! The possibilities are endless in this unblocked game. Will you play it safe and follow the rules, or will you take chances and make your mark? It's up to you to decide how you want to live your best life in BitLife.</p>
+                </article> 
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Unblocked Games. Play free HTML5 games anytime, anywhere.</p>
+    </footer>
+
+</body>
+</html>
